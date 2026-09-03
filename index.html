@@ -2,9 +2,16 @@
 <html lang="id" class="h-full bg-slate-100">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Laporan Permakanan Sekolah Rakyat Terintegrasi 1</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sistem Laporan Permakanan Sekolah Rakyat Terintegrasi</title>
+
+  <!-- Mobile Web App & Android PWA Meta Tags -->
+  <meta name="theme-color" content="#0f172a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="application-name" content="Permakanan SR">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -18,13 +25,6 @@
     * { box-sizing: border-box; }
     body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
 
-    /* Glassmorphism & Shadows */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(226, 232, 240, 0.8);
-    }
-    
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #f1f5f9; }
@@ -149,7 +149,6 @@
 
   <!-- LOGIN SECTION -->
   <div id="loginSection" class="min-h-screen flex items-center justify-center p-4 bg-slate-950 relative overflow-hidden">
-    <!-- Decorative background glow -->
     <div class="absolute -top-32 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -158,7 +157,7 @@
         <div class="inline-flex p-4 bg-amber-400 text-slate-950 rounded-2xl mb-4 shadow-lg shadow-amber-400/20 transform hover:scale-105 transition">
           <i class="fa-solid fa-utensils text-3xl"></i>
         </div>
-        <h1 class="text-xl font-black uppercase tracking-wider text-amber-400">Sekolah Rakyat Terintegrasi 1</h1>
+        <h1 class="text-xl font-black uppercase tracking-wider text-amber-400">Sekolah Rakyat Terintegrasi</h1>
         <p class="text-xs text-slate-400 mt-1 font-medium">Sistem Laporan Permakanan & Dokumentasi Nutrisi Siswa</p>
       </div>
 
@@ -169,7 +168,7 @@
             <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
               <i class="fa-solid fa-user text-xs"></i>
             </span>
-            <input type="text" id="loginUser" required placeholder="petugas / admin" 
+            <input type="text" id="loginUser" required placeholder="petugas / admin" value="petugas" 
               class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-slate-900 focus:bg-white focus:outline-none transition">
           </div>
         </div>
@@ -180,7 +179,7 @@
             <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
               <i class="fa-solid fa-lock text-xs"></i>
             </span>
-            <input type="password" id="loginPass" required placeholder="••••••••" 
+            <input type="password" id="loginPass" required placeholder="••••••••" value="123456" 
               class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-slate-900 focus:bg-white focus:outline-none transition">
           </div>
         </div>
@@ -222,8 +221,8 @@
             <i class="fa-solid fa-utensils"></i>
           </div>
           <div>
-            <h1 class="font-black text-xs md:text-sm leading-tight uppercase tracking-wider text-amber-400">Sekolah Rakyat Terintegrasi 1</h1>
-            <p class="text-[11px] text-slate-400 font-medium">Sistem Informasi Permakanan & Gizi Harian</p>
+            <h1 class="font-black text-xs md:text-sm leading-tight uppercase tracking-wider text-amber-400">Sekolah Rakyat Terintegrasi</h1>
+            <p class="text-[11px] text-slate-400 font-medium">Sistem Laporan Permakanan & Gizi Harian</p>
           </div>
         </div>
 
@@ -243,6 +242,10 @@
         </nav>
 
         <div class="flex items-center gap-3 border-l border-slate-800 pl-3">
+          <button id="androidInstallBtn" onclick="promptPwaInstall()" class="hidden px-3 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl shadow flex items-center gap-1.5 animate-pulse">
+            <i class="fa-brands fa-android text-sm"></i> <span class="hidden md:inline">Install di HP</span>
+          </button>
+
           <div class="text-right hidden md:block">
             <div id="userDisplayName" class="text-xs font-bold text-white">Petugas Permakanan</div>
             <div id="userDisplayRole" class="text-[10px] text-amber-400 uppercase font-semibold">Petugas Dapur</div>
@@ -256,11 +259,10 @@
     </header>
 
     <!-- Main Content Container -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 no-print space-y-6">
-      
-      <!-- TAB 1: DASHBOARD -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 no-print space-y-6 pb-24 md:pb-6">
+
+      <!-- TAB 1: DASHBOARD OVERVIEW -->
       <section id="tab-dashboard-content" class="space-y-6">
-        
         <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 rounded-3xl p-6 text-white shadow-xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative overflow-hidden">
           <div class="relative z-10">
             <span class="px-3 py-1 bg-amber-400/10 text-amber-400 text-[10px] font-black tracking-widest uppercase rounded-full border border-amber-400/20 inline-block mb-2">
@@ -268,11 +270,11 @@
             </span>
             <h2 class="text-xl font-black text-white">Selamat Datang di Portal Permakanan</h2>
             <p class="text-xs text-slate-400 mt-1 max-w-2xl">
-              Dokumentasi real-time konsumsi makanan utama & snack gizi harian siswa Sekolah Rakyat Terintegrasi 1 Kabupaten Madiun.
+              Dokumentasi real-time konsumsi makanan utama & snack gizi harian siswa Sekolah Rakyat Terintegrasi.
             </p>
           </div>
           <div class="flex gap-2 relative z-10 w-full md:w-auto">
-            <button onclick="switchTab('form')" class="w-full md:w-auto px-5 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-lg shadow-amber-400/20 transition">
+            <button onclick="createNewReport()" class="w-full md:w-auto px-5 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-lg shadow-amber-400/20 transition">
               <i class="fa-solid fa-plus-circle text-base"></i> Buat Laporan Hari Ini
             </button>
           </div>
@@ -282,8 +284,8 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between text-slate-500 mb-3">
-              <span class="text-xs font-bold uppercase text-slate-500">Total Laporan</span>
-              <div class="p-2 bg-slate-100 rounded-xl text-slate-900"><i class="fa-solid fa-folder-open"></i></div>
+              <span class="text-xs font-bold uppercase text-slate-500">Total Arsip</span>
+              <div class="p-2 bg-slate-100 rounded-xl text-slate-900"><i class="fa-solid fa-box-archive"></i></div>
             </div>
             <div>
               <div id="statTotalReports" class="text-2xl font-black text-slate-900">0</div>
@@ -298,7 +300,7 @@
             </div>
             <div>
               <div id="statMonthReports" class="text-2xl font-black text-slate-900">0</div>
-              <p class="text-[10px] text-slate-400 mt-1 font-semibold">Bulan berjalan</p>
+              <p class="text-[10px] text-slate-400 mt-1 font-semibold">Laporan bulan berjalan</p>
             </div>
           </div>
 
@@ -309,20 +311,20 @@
             </div>
             <div>
               <div id="statTotalPortions" class="text-2xl font-black text-slate-900">0</div>
-              <p class="text-[10px] text-slate-400 mt-1 font-semibold">Siswa terlayani</p>
+              <p class="text-[10px] text-slate-400 mt-1 font-semibold">Porsi makanan terdistribusi</p>
             </div>
           </div>
 
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div class="flex items-center justify-between text-slate-500 mb-3">
-              <span class="text-xs font-bold uppercase text-slate-500">Status Sync</span>
-              <div class="p-2 bg-sky-50 rounded-xl text-sky-600"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <span class="text-xs font-bold uppercase text-slate-500">Status Database</span>
+              <div class="p-2 bg-sky-50 rounded-xl text-sky-600"><i class="fa-solid fa-database"></i></div>
             </div>
             <div>
               <div id="statSyncStatus" class="text-xs font-black text-emerald-600 uppercase flex items-center gap-1">
-                <i class="fa-solid fa-circle-check"></i> Siap Terkoneksi
+                <i class="fa-solid fa-circle-check"></i> Tersimpan (Lokal & Cloud)
               </div>
-              <p id="statSyncDetail" class="text-[10px] text-slate-400 mt-1 font-semibold">Google Webhook Ready</p>
+              <p id="statSyncDetail" class="text-[10px] text-slate-400 mt-1 font-semibold">Tabel Arsip Terhubung</p>
             </div>
           </div>
         </div>
@@ -334,7 +336,7 @@
               <i class="fa-solid fa-clock-rotate-left text-amber-500"></i> Riwayat Laporan Permakanan Terbaru
             </h3>
             <button onclick="switchTab('reports')" class="text-xs font-bold text-slate-900 hover:text-amber-600 hover:underline flex items-center gap-1">
-              Lihat Semua <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              Lihat Semua Arsip <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </button>
           </div>
 
@@ -372,7 +374,7 @@
             </div>
             
             <div id="cloudStatus" class="px-3.5 py-1.5 bg-slate-100 text-slate-800 text-xs font-bold rounded-full border border-slate-300 flex items-center gap-2">
-              <i class="fa-solid fa-circle-check text-emerald-600"></i> <span>Tersimpan Lokal</span>
+              <i class="fa-solid fa-circle-check text-emerald-600"></i> <span>Tersimpan di Arsip</span>
             </div>
           </div>
 
@@ -385,12 +387,12 @@
             </div>
             <div>
               <label class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Nama Petugas Input</label>
-              <input type="text" id="inputPetugas" onchange="handleMetaChange()" placeholder="Nama Petugas Dapur" 
+              <input type="text" id="inputPetugas" onkeyup="handleMetaChange()" onchange="handleMetaChange()" placeholder="Nama Petugas Dapur" 
                 class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
             </div>
             <div>
               <label class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Jumlah Porsi / Siswa</label>
-              <input type="number" id="inputPorsi" onchange="handleMetaChange()" placeholder="Contoh: 120" 
+              <input type="number" id="inputPorsi" onkeyup="handleMetaChange()" onchange="handleMetaChange()" placeholder="Contoh: 120" 
                 class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
             </div>
           </div>
@@ -423,11 +425,11 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
-                  <label class="cursor-pointer py-2 px-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-[11px] text-center transition flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-folder-open"></i> Upload
+                  <label class="cursor-pointer py-2.5 px-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-[11px] text-center transition flex items-center justify-center gap-1 active:scale-95">
+                    <i class="fa-solid fa-folder-open"></i> Galeri
                     <input type="file" accept="image/*" onchange="handlePhotoUpload(event, 'imgPagi', 'txtPagi')" class="hidden">
                   </label>
-                  <button type="button" onclick="openWebcamModal('imgPagi', 'txtPagi')" class="py-2 px-3 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1">
+                  <button type="button" onclick="openWebcamModal('imgPagi', 'txtPagi')" class="py-2.5 px-3 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1 active:scale-95">
                     <i class="fa-solid fa-camera text-amber-400"></i> Kamera
                   </button>
                 </div>
@@ -452,7 +454,7 @@
 
                 <div class="grid grid-cols-2 gap-2">
                   <label class="cursor-pointer py-2 px-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-[11px] text-center transition flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-folder-open"></i> Upload
+                    <i class="fa-solid fa-folder-open"></i> Galeri
                     <input type="file" accept="image/*" onchange="handlePhotoUpload(event, 'imgSiang', 'txtSiang')" class="hidden">
                   </label>
                   <button type="button" onclick="openWebcamModal('imgSiang', 'txtSiang')" class="py-2 px-3 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1">
@@ -480,7 +482,7 @@
 
                 <div class="grid grid-cols-2 gap-2">
                   <label class="cursor-pointer py-2 px-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-[11px] text-center transition flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-folder-open"></i> Upload
+                    <i class="fa-solid fa-folder-open"></i> Galeri
                     <input type="file" accept="image/*" onchange="handlePhotoUpload(event, 'imgMalam', 'txtMalam')" class="hidden">
                   </label>
                   <button type="button" onclick="openWebcamModal('imgMalam', 'txtMalam')" class="py-2 px-3 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1">
@@ -520,7 +522,7 @@
 
                 <div class="grid grid-cols-2 gap-2">
                   <label class="cursor-pointer py-2 px-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-[11px] text-center transition flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-folder-open"></i> Upload
+                    <i class="fa-solid fa-folder-open"></i> Galeri
                     <input type="file" accept="image/*" onchange="handlePhotoUpload(event, 'imgSnackPagi', 'txtSnackPagi')" class="hidden">
                   </label>
                   <button type="button" onclick="openWebcamModal('imgSnackPagi', 'txtSnackPagi')" class="py-2 px-3 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1">
@@ -548,7 +550,7 @@
 
                 <div class="grid grid-cols-2 gap-2">
                   <label class="cursor-pointer py-2 px-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-[11px] text-center transition flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-folder-open"></i> Upload
+                    <i class="fa-solid fa-folder-open"></i> Galeri
                     <input type="file" accept="image/*" onchange="handlePhotoUpload(event, 'imgSnackSore', 'txtSnackSore')" class="hidden">
                   </label>
                   <button type="button" onclick="openWebcamModal('imgSnackSore', 'txtSnackSore')" class="py-2 px-3 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1">
@@ -561,6 +563,9 @@
 
           <!-- Bottom Action Buttons -->
           <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200">
+            <button onclick="explicitSaveReport()" type="button" class="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-xs font-black flex items-center justify-center gap-2 shadow-lg transition">
+              <i class="fa-solid fa-box-archive"></i> Simpan Ke Arsip Laporan
+            </button>
             <button onclick="syncToGoogleSheetsAndDrive()" type="button" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition">
               <i class="fa-solid fa-cloud-arrow-up"></i> Sync Ke Google Sheets & Drive
             </button>
@@ -581,15 +586,20 @@
               <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-box-archive text-amber-500"></i> Arsip Laporan Permakanan
               </h2>
-              <p class="text-xs text-slate-500 mt-0.5">Riwayat lengkap laporan konsumsi harian yang tersimpan.</p>
+              <p class="text-xs text-slate-500 mt-0.5">Riwayat lengkap laporan konsumsi harian yang tersimpan di sistem.</p>
             </div>
             
-            <div class="relative w-full sm:w-72">
-              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
-                <i class="fa-solid fa-magnifying-glass text-xs"></i>
-              </span>
-              <input type="text" id="searchReportInput" onkeyup="filterReportTable()" placeholder="Cari tanggal / petugas..." 
-                class="pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs w-full focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <div class="relative w-full sm:w-64">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                  <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                </span>
+                <input type="text" id="searchReportInput" onkeyup="filterReportTable()" placeholder="Cari tanggal / petugas..." 
+                  class="pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs w-full focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
+              </div>
+              <button onclick="createNewReport()" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl text-xs shrink-0 flex items-center gap-1.5 shadow">
+                <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Tambah</span>
+              </button>
             </div>
           </div>
 
@@ -644,16 +654,36 @@
 
           <div class="p-5 bg-amber-500/10 border border-amber-500/20 rounded-2xl space-y-2">
             <h4 class="font-bold text-xs text-slate-900 flex items-center gap-2">
-              <i class="fa-solid fa-circle-info text-amber-600"></i> Informasi Script Backend:
+              <i class="fa-solid fa-mobile-screen-button text-amber-600"></i> Penggunaan di Android Smartphone:
             </h4>
             <p class="text-xs text-slate-600 leading-relaxed">
-              Pastikan Anda telah menyalin kode Apps Script backend dari file <code class="px-1.5 py-0.5 bg-white border rounded text-[11px] font-mono">Code.gs</code> ke Google Apps Script editor, lalu mendeploy sebagai <strong>Web App</strong> dengan akses <em>"Anyone" (Siapa Saja)</em>.
+              Aplikasi ini didesain 100% responsif & mendukung mode <strong>PWA (Progressive Web App)</strong>. Anda dapat membuka web app di Google Chrome Android, lalu menekan tombol <strong>"Tambah ke Layar Utama"</strong> untuk menginstallnya seperti aplikasi Android (.apk) bawaan tanpa perlu mengunggah ke Play Store.
             </p>
           </div>
         </div>
       </section>
 
     </main>
+
+    <!-- MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="no-print sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 px-2 py-1.5 flex justify-around items-center text-slate-400">
+      <button onclick="switchTab('dashboard')" id="mobile-nav-dashboard" class="flex flex-col items-center py-1 px-3 text-amber-400 font-bold">
+        <i class="fa-solid fa-chart-pie text-base"></i>
+        <span class="text-[10px] mt-0.5">Beranda</span>
+      </button>
+      <button onclick="switchTab('form')" id="mobile-nav-form" class="flex flex-col items-center py-1 px-3 hover:text-white">
+        <i class="fa-solid fa-pen-to-square text-base"></i>
+        <span class="text-[10px] mt-0.5">Input</span>
+      </button>
+      <button onclick="switchTab('reports')" id="mobile-nav-reports" class="flex flex-col items-center py-1 px-3 hover:text-white">
+        <i class="fa-solid fa-box-archive text-base"></i>
+        <span class="text-[10px] mt-0.5">Arsip</span>
+      </button>
+      <button onclick="switchTab('settings')" id="mobile-nav-settings" class="flex flex-col items-center py-1 px-3 hover:text-white">
+        <i class="fa-solid fa-cloud-gear text-base"></i>
+        <span class="text-[10px] mt-0.5">Integrasi</span>
+      </button>
+    </nav>
 
     <!-- DEDICATED PRINT PREVIEW A4 MODAL -->
     <div id="printPreviewModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md overflow-y-auto p-4 md:p-8">
@@ -691,7 +721,7 @@
           <div class="a4-page">
             <div>
               <div class="doc-kop">
-                <h2 class="text-sm font-black uppercase tracking-wider">Dokumentasi Permakanan Siswa Sekolah Rakyat Terintegrasi 1 Kabupaten Madiun</h2>
+                <h2 class="text-sm font-black uppercase tracking-wider">Dokumentasi Permakanan Siswa Sekolah Rakyat Terintegrasi</h2>
                 <h3 class="text-xs font-bold text-slate-700 mt-1">Laporan Konsumsi Makanan Utama Harian</h3>
               </div>
 
@@ -699,6 +729,14 @@
                 <tr>
                   <td class="label">Hari / Tanggal</td>
                   <td>: <span id="viewTanggal1" class="font-bold">-</span></td>
+                </tr>
+                <tr>
+                  <td class="label">Petugas Input</td>
+                  <td>: <span id="viewPetugas1" class="font-bold">-</span></td>
+                </tr>
+                <tr>
+                  <td class="label">Jumlah Porsi</td>
+                  <td>: <span id="viewPorsi1" class="font-bold">-</span> Porsi</td>
                 </tr>
               </table>
 
@@ -738,7 +776,7 @@
           <div class="a4-page">
             <div>
               <div class="doc-kop">
-                <h2 class="text-sm font-black uppercase tracking-wider">Dokumentasi Permakanan Siswa Sekolah Rakyat Terintegrasi 1 Kabupaten Madiun</h2>
+                <h2 class="text-sm font-black uppercase tracking-wider">Dokumentasi Permakanan Siswa Sekolah Rakyat Terintegrasi</h2>
                 <h3 class="text-xs font-bold text-slate-700 mt-1">Laporan Konsumsi Nutrisi Snack Harian</h3>
               </div>
 
@@ -746,6 +784,10 @@
                 <tr>
                   <td class="label">Hari / Tanggal</td>
                   <td>: <span id="viewTanggal2" class="font-bold">-</span></td>
+                </tr>
+                <tr>
+                  <td class="label">Petugas Input</td>
+                  <td>: <span id="viewPetugas2" class="font-bold">-</span></td>
                 </tr>
               </table>
 
@@ -780,139 +822,281 @@
 
   </div>
 
+  <!-- FIREBASE ENGINE & CLOUD SYNC -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
     let auth, db, currentUser = null;
 
+    if (firebaseConfig) {
+      try {
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        const initAuth = async () => {
+          try {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+              await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+              await signInAnonymously(auth);
+            }
+          } catch (err) {
+            console.error("Auth init error:", err);
+          }
+        };
+        initAuth();
+
+        onAuthStateChanged(auth, (user) => {
+          currentUser = user;
+          if (user) {
+            window.fetchCloudReportsAndMerge();
+          }
+        });
+      } catch (e) {
+        console.warn("Firebase not initialized, fallback to LocalStorage engine.", e);
+      }
+    }
+
+    // Save report to Cloud (Firestore)
+    window.saveReportToCloud = async function(report) {
+      if (!db || !currentUser || !report.tanggal) return;
+      try {
+        const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'reports', report.tanggal);
+        await setDoc(docRef, {
+          tanggal: report.tanggal,
+          petugas: report.petugas || 'Petugas Permakanan',
+          porsi: report.porsi || 0,
+          photos: report.photos || {},
+          updatedAt: new Date().toISOString()
+        });
+      } catch (err) {
+        console.error("Gagal simpan ke Firebase Cloud:", err);
+      }
+    };
+
+    // Delete report from Cloud
+    window.deleteReportFromCloud = async function(tanggalStr) {
+      if (!db || !currentUser || !tanggalStr) return;
+      try {
+        const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'reports', tanggalStr);
+        await deleteDoc(docRef);
+      } catch (err) {
+        console.error("Gagal hapus dari Firebase Cloud:", err);
+      }
+    };
+
+    // Fetch reports from Cloud and merge with Local Storage
+    window.fetchCloudReportsAndMerge = async function() {
+      if (!db || !currentUser) return;
+      try {
+        const colRef = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'reports');
+        const snapshot = await getDocs(colRef);
+        
+        let localData = window.getLocalStorageReports();
+        
+        snapshot.forEach(d => {
+          const cloudData = d.data();
+          if (cloudData && cloudData.tanggal) {
+            localData[cloudData.tanggal] = cloudData;
+          }
+        });
+
+        window.saveLocalStorageReports(localData);
+        window.loadAllReportsToState();
+      } catch (err) {
+        console.error("Gagal sync dari Firebase:", err);
+      }
+    };
+  </script>
+
+  <!-- APPLICATION CORE LOGIC & LOCAL ARCHIVE ENGINE -->
+  <script>
+    const STORAGE_KEY = 'SR_PERMAKANAN_REPORTS_V2';
+    
+    let currentAuthUser = null;
+    let activeWebcamStream = null;
+    let activeTargetImgId = null;
+    let activeTargetTxtId = null;
+    let currentFacingMode = 'environment';
+    let deferredPwaPrompt = null;
+
+    // Active state report being edited in form
     window.reportData = {
       tanggal: new Date().toISOString().split('T')[0],
-      petugas: 'Petugas Permakanan',
+      petugas: 'Petugas Permakanan Dapur',
       porsi: 120,
       photos: { imgPagi: '', imgSiang: '', imgMalam: '', imgSnackPagi: '', imgSnackSore: '' }
     };
 
     window.allReportsList = [];
 
-    if (firebaseConfig) {
-      const app = initializeApp(firebaseConfig);
-      auth = getAuth(app);
-      db = getFirestore(app);
+    // --- LOCAL STORAGE MANAGER ---
+    window.getLocalStorageReports = function() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        console.error("Gagal membaca LocalStorage:", e);
+        return {};
+      }
+    };
 
-      const initAuth = async () => {
-        try {
-          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-            await signInWithCustomToken(auth, __initial_auth_token);
-          } else {
-            await signInAnonymously(auth);
-          }
-        } catch (err) {
-          console.error("Auth init error:", err);
-        }
+    window.saveLocalStorageReports = function(reportsObj) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(reportsObj));
+      } catch (e) {
+        console.error("Gagal menyimpan ke LocalStorage:", e);
+      }
+    };
+
+    // Load & parse all reports to memory and refresh tables
+    window.loadAllReportsToState = function() {
+      const dict = window.getLocalStorageReports();
+      let list = Object.values(dict);
+
+      // Seed default demo reports if empty
+      if (list.length === 0) {
+        const today = new Date().toISOString().split('T')[0];
+        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+        
+        dict[today] = {
+          tanggal: today,
+          petugas: 'Petugas Dapur',
+          porsi: 120,
+          photos: { imgPagi: '', imgSiang: '', imgMalam: '', imgSnackPagi: '', imgSnackSore: '' }
+        };
+        dict[yesterday] = {
+          tanggal: yesterday,
+          petugas: 'Petugas Dapur',
+          porsi: 125,
+          photos: { imgPagi: '', imgSiang: '', imgMalam: '', imgSnackPagi: '', imgSnackSore: '' }
+        };
+        window.saveLocalStorageReports(dict);
+        list = Object.values(dict);
+      }
+
+      // Sort descending by date
+      list.sort((a, b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
+      window.allReportsList = list;
+
+      window.updateDashboardStats();
+      window.renderArchiveTable();
+    };
+
+    // Commit current form data to archive (Local + Cloud)
+    window.saveCurrentReportToArchive = function(silent = false) {
+      if (!window.reportData.tanggal) return;
+
+      const dateKey = window.reportData.tanggal;
+      const dict = window.getLocalStorageReports();
+      
+      dict[dateKey] = {
+        tanggal: dateKey,
+        petugas: window.reportData.petugas || 'Petugas Permakanan',
+        porsi: Number(window.reportData.porsi) || 0,
+        photos: { ...window.reportData.photos },
+        updatedAt: new Date().toISOString()
       };
-      initAuth();
 
-      onAuthStateChanged(auth, (user) => {
-        currentUser = user;
-        if (user) {
-          window.loadReportFromCloud();
-          window.fetchAllReportsFromCloud();
-        }
-      });
+      window.saveLocalStorageReports(dict);
+      
+      // Save to Cloud if module is active
+      if (window.saveReportToCloud) {
+        window.saveReportToCloud(dict[dateKey]);
+      }
+
+      window.loadAllReportsToState();
+      window.setSaveStatus('saved', '✅ Tersimpan di Arsip');
+
+      if (!silent) {
+        showToast(`Laporan tanggal ${formatDate(dateKey)} berhasil direkam!`, 'success');
+      }
+    };
+
+    // Explicit manual save button action
+    function explicitSaveReport() {
+      window.saveCurrentReportToArchive(false);
     }
 
-    window.saveReportToCloud = async function() {
-      if (!db || !currentUser) {
-        window.setSaveStatus('saved', '☁️ Tersimpan Lokal');
-        window.updateDashboardStats();
-        return;
+    // Load selected archive report into form
+    function loadReportToForm(tanggalStr) {
+      const dict = window.getLocalStorageReports();
+      const item = dict[tanggalStr];
+
+      if (item) {
+        window.reportData = {
+          tanggal: item.tanggal,
+          petugas: item.petugas || 'Petugas Permakanan',
+          porsi: item.porsi || 120,
+          photos: { ...item.photos }
+        };
+
+        document.getElementById('inputTanggal').value = item.tanggal;
+        document.getElementById('inputPetugas').value = window.reportData.petugas;
+        document.getElementById('inputPorsi').value = window.reportData.porsi;
+
+        const photos = window.reportData.photos || {};
+        displayPhoto('imgPagi', 'txtPagi', photos.imgPagi);
+        displayPhoto('imgSiang', 'txtSiang', photos.imgSiang);
+        displayPhoto('imgMalam', 'txtMalam', photos.imgMalam);
+        displayPhoto('imgSnackPagi', 'txtSnackPagi', photos.imgSnackPagi);
+        displayPhoto('imgSnackSore', 'txtSnackSore', photos.imgSnackSore);
+
+        handleDateChange();
+        showToast(`Laporan tanggal ${formatDate(tanggalStr)} dimuat ke Form!`, 'info');
       }
+    }
 
-      const dateKey = window.reportData.tanggal;
-      if (!dateKey) return;
+    // Delete report from Archive
+    function deleteReport(tanggalStr) {
+      if (confirm(`Apakah Anda yakin ingin menghapus arsip laporan tanggal ${formatDate(tanggalStr)}?`)) {
+        const dict = window.getLocalStorageReports();
+        delete dict[tanggalStr];
+        window.saveLocalStorageReports(dict);
 
-      window.setSaveStatus('saving', '⏳ Menyimpan...');
-
-      try {
-        const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'reports', dateKey);
-        await setDoc(docRef, {
-          tanggal: window.reportData.tanggal,
-          petugas: window.reportData.petugas || 'Petugas Permakanan',
-          porsi: window.reportData.porsi || 0,
-          photos: window.reportData.photos,
-          updatedAt: new Date().toISOString()
-        });
-        window.setSaveStatus('saved', '✅ Tersimpan Otomatis');
-        window.fetchAllReportsFromCloud();
-      } catch (err) {
-        console.error("Gagal simpan cloud:", err);
-        window.setSaveStatus('error', '⚠️ Gagal Menyimpan');
-      }
-    };
-
-    window.loadReportFromCloud = async function() {
-      if (!db || !currentUser) return;
-      const dateKey = window.reportData.tanggal;
-      if (!dateKey) return;
-
-      try {
-        const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'reports', dateKey);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          window.reportData.photos = data.photos || {};
-          window.reportData.petugas = data.petugas || 'Petugas Permakanan';
-          window.reportData.porsi = data.porsi || 120;
-
-          document.getElementById('inputPetugas').value = window.reportData.petugas;
-          document.getElementById('inputPorsi').value = window.reportData.porsi;
-          
-          displayPhoto('imgPagi', 'txtPagi', window.reportData.photos.imgPagi);
-          displayPhoto('imgSiang', 'txtSiang', window.reportData.photos.imgSiang);
-          displayPhoto('imgMalam', 'txtMalam', window.reportData.photos.imgMalam);
-          displayPhoto('imgSnackPagi', 'txtSnackPagi', window.reportData.photos.imgSnackPagi);
-          displayPhoto('imgSnackSore', 'txtSnackSore', window.reportData.photos.imgSnackSore);
-          window.setSaveStatus('saved', '✅ Dimuat dari Cloud');
-        } else {
-          resetPhotos();
-          window.setSaveStatus('saved', '☁️ Siap Input Laporan');
+        if (window.deleteReportFromCloud) {
+          window.deleteReportFromCloud(tanggalStr);
         }
-      } catch (err) {
-        console.error("Gagal muat data:", err);
-      }
-    };
 
-    window.fetchAllReportsFromCloud = async function() {
-      if (!db || !currentUser) return;
-      try {
-        const colRef = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'reports');
-        const snapshot = await getDocs(colRef);
-        const reports = [];
-        snapshot.forEach(d => reports.push(d.data()));
-        reports.sort((a,b) => (b.tanggal || '').localeCompare(a.tanggal || ''));
-        window.allReportsList = reports;
-        window.renderArchiveTable();
-        window.updateDashboardStats();
-      } catch (err) {
-        console.error("Gagal fetch laporan:", err);
+        window.loadAllReportsToState();
+        showToast(`Arsip laporan tanggal ${formatDate(tanggalStr)} telah dihapus.`, 'info');
       }
-    };
+    }
 
-    function resetPhotos() {
+    // Create a new blank report
+    function createNewReport() {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('inputTanggal').value = today;
+      document.getElementById('inputPorsi').value = 120;
+      
+      window.reportData = {
+        tanggal: today,
+        petugas: currentAuthUser ? currentAuthUser.displayName : 'Petugas Permakanan',
+        porsi: 120,
+        photos: { imgPagi: '', imgSiang: '', imgMalam: '', imgSnackPagi: '', imgSnackSore: '' }
+      };
+
+      resetPhotoPreviews();
+      handleDateChange();
+      switchTab('form');
+      showToast('Form laporan baru siap diisi.', 'info');
+    }
+
+    function resetPhotoPreviews() {
       const keys = ['imgPagi', 'imgSiang', 'imgMalam', 'imgSnackPagi', 'imgSnackSore'];
       const txts = ['txtPagi', 'txtSiang', 'txtMalam', 'txtSnackPagi', 'txtSnackSore'];
       keys.forEach((k, idx) => {
-        window.reportData.photos[k] = '';
         displayPhoto(k, txts[idx], '');
       });
     }
 
+    // UI Helper to show photo
     function displayPhoto(imgId, txtId, dataUrl) {
       const img = document.getElementById(imgId);
       const txt = document.getElementById(txtId);
@@ -940,16 +1124,79 @@
         }
       }
     }
-  </script>
 
-  <script>
-    let currentAuthUser = null;
-    let activeWebcamStream = null;
-    let activeTargetImgId = null;
-    let activeTargetTxtId = null;
-    let currentFacingMode = 'environment';
+    // INIT
+    window.addEventListener('load', () => {
+      injectPwaManifest();
+      initPwaInstallPrompt();
+      window.loadAllReportsToState();
+    });
 
-    // TOAST NOTIFICATION UTILITY
+    function injectPwaManifest() {
+      const manifestData = {
+        name: "Laporan Permakanan Sekolah Rakyat",
+        short_name: "Permakanan SR",
+        start_url: window.location.href,
+        display: "standalone",
+        background_color: "#0f172a",
+        theme_color: "#0f172a",
+        orientation: "portrait",
+        icons: [
+          { src: "https://placehold.co/192x192/0f172a/f59e0b?text=Permakanan+SR", sizes: "192x192", type: "image/png" },
+          { src: "https://placehold.co/512x512/0f172a/f59e0b?text=Permakanan+SR", sizes: "512x512", type: "image/png" }
+        ]
+      };
+      const stringManifest = JSON.stringify(manifestData);
+      const blob = new Blob([stringManifest], {type: 'application/json'});
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = URL.createObjectURL(blob);
+      document.head.appendChild(link);
+    }
+
+    function initPwaInstallPrompt() {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPwaPrompt = e;
+        const btn = document.getElementById('androidInstallBtn');
+        if (btn) btn.classList.remove('hidden');
+      });
+    }
+
+    function promptPwaInstall() {
+      if (deferredPwaPrompt) {
+        deferredPwaPrompt.prompt();
+        deferredPwaPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('Aplikasi berhasil dipasang di Android!', 'success');
+          }
+          deferredPwaPrompt = null;
+          document.getElementById('androidInstallBtn').classList.add('hidden');
+        });
+      } else {
+        showToast('Untuk install: Buka menu titik tiga Chrome -> "Tambah ke Layar Utama"', 'info');
+      }
+    }
+
+    function switchTab(tabName) {
+      const tabs = ['dashboard', 'form', 'reports', 'settings'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`nav-${t}`);
+        const mobileBtn = document.getElementById(`mobile-nav-${t}`);
+        const content = document.getElementById(`tab-${t}-content`);
+        
+        if (t === tabName) {
+          if (btn) btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 bg-slate-800 text-amber-400 shadow";
+          if (mobileBtn) mobileBtn.className = "flex flex-col items-center py-1 px-3 text-amber-400 font-bold";
+          if (content) content.classList.remove('hidden');
+        } else {
+          if (btn) btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-300 hover:bg-slate-800 hover:text-white transition";
+          if (mobileBtn) mobileBtn.className = "flex flex-col items-center py-1 px-3 text-slate-400 hover:text-white";
+          if (content) content.classList.add('hidden');
+        }
+      });
+    }
+
     function showToast(message, type = 'info') {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
@@ -967,10 +1214,7 @@
       
       container.appendChild(toast);
 
-      setTimeout(() => {
-        toast.classList.remove('translate-y-2', 'opacity-0');
-      }, 50);
-
+      setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 50);
       setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-2');
         setTimeout(() => toast.remove(), 300);
@@ -1002,7 +1246,7 @@
         
         handleDateChange();
         loadSavedGoogleUrl();
-        showToast(`Selamat datang kembali, ${currentAuthUser.displayName}!`, 'success');
+        showToast(`Selamat datang, ${currentAuthUser.displayName}!`, 'success');
       } else {
         showToast('Username atau kata sandi tidak cocok!', 'error');
       }
@@ -1013,21 +1257,6 @@
       document.getElementById('appDashboard').classList.add('hidden');
       document.getElementById('loginSection').classList.remove('hidden');
       showToast('Sesi masuk telah berakhir.', 'info');
-    }
-
-    function switchTab(tabName) {
-      const tabs = ['dashboard', 'form', 'reports', 'settings'];
-      tabs.forEach(t => {
-        const btn = document.getElementById(`nav-${t}`);
-        const content = document.getElementById(`tab-${t}-content`);
-        if (t === tabName) {
-          btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 bg-slate-800 text-amber-400 shadow";
-          content.classList.remove('hidden');
-        } else {
-          btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-300 hover:bg-slate-800 hover:text-white transition";
-          content.classList.add('hidden');
-        }
-      });
     }
 
     function setSaveStatus(status, message) {
@@ -1051,19 +1280,26 @@
       if (document.getElementById('viewPetugas1')) document.getElementById('viewPetugas1').innerText = petugas;
       if (document.getElementById('viewPetugas2')) document.getElementById('viewPetugas2').innerText = petugas;
       if (document.getElementById('viewPorsi1')) document.getElementById('viewPorsi1').innerText = porsi;
-      if (document.getElementById('sigPetugas')) document.getElementById('sigPetugas').innerText = `( ${petugas} )`;
 
-      if (window.reportData) {
-        window.reportData.tanggal = tanggal;
-        window.reportData.petugas = petugas;
-        window.reportData.porsi = porsi;
-        if (window.loadReportFromCloud) window.loadReportFromCloud();
+      window.reportData.tanggal = tanggal;
+      window.reportData.petugas = petugas;
+      window.reportData.porsi = porsi;
+
+      // Auto load photo data if exists in archive for this date
+      const dict = window.getLocalStorageReports();
+      if (dict[tanggal]) {
+        window.reportData.photos = { ...dict[tanggal].photos };
+        displayPhoto('imgPagi', 'txtPagi', window.reportData.photos.imgPagi);
+        displayPhoto('imgSiang', 'txtSiang', window.reportData.photos.imgSiang);
+        displayPhoto('imgMalam', 'txtMalam', window.reportData.photos.imgMalam);
+        displayPhoto('imgSnackPagi', 'txtSnackPagi', window.reportData.photos.imgSnackPagi);
+        displayPhoto('imgSnackSore', 'txtSnackSore', window.reportData.photos.imgSnackSore);
       }
     }
 
     function handleMetaChange() {
       handleDateChange();
-      if (window.saveReportToCloud) window.saveReportToCloud();
+      window.saveCurrentReportToArchive(true); // Silent auto-save on change
     }
 
     function handlePhotoUpload(event, targetImgId, targetTxtId) {
@@ -1076,26 +1312,13 @@
     }
 
     function applyCapturedPhoto(targetImgId, targetTxtId, dataUrl) {
-      const img = document.getElementById(targetImgId);
-      const txt = document.getElementById(targetTxtId);
-      const formImg = document.getElementById(`formPreview-${targetImgId}`);
-      const formPlaceholder = document.getElementById(`formPlaceholder-${targetImgId}`);
-      const badge = document.getElementById(`badge-${targetImgId}`);
+      displayPhoto(targetImgId, targetTxtId, dataUrl);
 
-      if (img) { img.src = dataUrl; img.style.display = 'block'; }
-      if (txt) txt.style.display = 'none';
-      if (formImg) { formImg.src = dataUrl; formImg.classList.remove('hidden'); }
-      if (formPlaceholder) { formPlaceholder.classList.add('hidden'); }
-      if (badge) {
-        badge.className = "text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800";
-        badge.innerText = "Terunggah";
-      }
+      if (!window.reportData.photos) window.reportData.photos = {};
+      window.reportData.photos[targetImgId] = dataUrl;
 
-      if (window.reportData) {
-        window.reportData.photos[targetImgId] = dataUrl;
-        if (window.saveReportToCloud) window.saveReportToCloud();
-      }
-      showToast('Foto berhasil disimpan!', 'success');
+      window.saveCurrentReportToArchive(true);
+      showToast('Foto berhasil disimpan ke Laporan!', 'success');
     }
 
     // WEBCAM LIVE STREAM MODAL LOGIC
@@ -1264,9 +1487,12 @@
             <td class="p-3.5 font-semibold text-slate-800">${r.porsi || 0} Porsi</td>
             <td class="p-3.5"><span class="px-2 py-0.5 bg-slate-200 text-slate-900 text-[10px] font-bold rounded">${countUtama} / 3 Foto</span></td>
             <td class="p-3.5"><span class="px-2 py-0.5 bg-slate-200 text-slate-900 text-[10px] font-bold rounded">${countSnack} / 2 Foto</span></td>
-            <td class="p-3.5 text-right">
-              <button onclick="loadReportToForm('${r.tanggal}')" class="px-3 py-1.5 bg-slate-950 text-amber-400 text-[10px] font-bold rounded-lg hover:bg-slate-800 transition">
-                <i class="fa-solid fa-eye mr-1"></i> Buka / Print
+            <td class="p-3.5 text-right flex justify-end gap-1.5">
+              <button onclick="loadReportToForm('${r.tanggal}'); switchTab('form');" class="px-3 py-1.5 bg-slate-950 text-amber-400 text-[10px] font-bold rounded-lg hover:bg-slate-800 transition">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> Sunting
+              </button>
+              <button onclick="loadReportToForm('${r.tanggal}'); openPrintPreviewModal();" class="px-3 py-1.5 bg-emerald-700 text-white text-[10px] font-bold rounded-lg hover:bg-emerald-800 transition">
+                <i class="fa-solid fa-print mr-1"></i> Cetak A4
               </button>
             </td>
           </tr>
@@ -1291,12 +1517,18 @@
           <tr class="hover:bg-slate-50 transition">
             <td class="p-3.5 font-bold text-slate-900">${formatDate(r.tanggal)}</td>
             <td class="p-3.5 text-slate-600">${r.petugas || 'Petugas'}</td>
-            <td class="p-3.5 text-slate-800">${r.porsi || 0} Porsi</td>
+            <td class="p-3.5 text-slate-800 font-bold">${r.porsi || 0} Porsi</td>
             <td class="p-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-900 text-[10px] font-bold rounded">${countUtama} / 3 Foto</span></td>
             <td class="p-3.5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 text-[10px] font-bold rounded">${countSnack} / 2 Foto</span></td>
-            <td class="p-3.5 text-center">
-              <button onclick="loadReportToForm('${r.tanggal}')" class="px-3.5 py-1.5 bg-slate-950 text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition shadow">
-                <i class="fa-solid fa-print mr-1"></i> Pratinjau A4
+            <td class="p-3.5 text-center flex justify-center gap-1.5">
+              <button onclick="loadReportToForm('${r.tanggal}'); openPrintPreviewModal();" class="px-3 py-1.5 bg-slate-950 text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition shadow">
+                <i class="fa-solid fa-print mr-1"></i> Cetak A4
+              </button>
+              <button onclick="loadReportToForm('${r.tanggal}'); switchTab('form');" class="px-3 py-1.5 bg-amber-500 text-slate-950 text-xs font-bold rounded-xl hover:bg-amber-400 transition shadow">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+              </button>
+              <button onclick="deleteReport('${r.tanggal}')" class="px-2.5 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold rounded-xl transition" title="Hapus Laporan">
+                <i class="fa-solid fa-trash"></i>
               </button>
             </td>
           </tr>
@@ -1310,13 +1542,6 @@
       rows.forEach(r => {
         r.style.display = r.innerText.toLowerCase().includes(query) ? '' : 'none';
       });
-    }
-
-    function loadReportToForm(tanggalStr) {
-      document.getElementById('inputTanggal').value = tanggalStr;
-      switchTab('form');
-      handleDateChange();
-      openPrintPreviewModal();
     }
 
     function saveGoogleSettings() {
@@ -1338,6 +1563,7 @@
         return;
       }
 
+      window.saveCurrentReportToArchive(true);
       setSaveStatus('saving', '⏳ Mengirim data & unggah foto...');
       showToast('Mengirim laporan ke Google Sheets & Drive...', 'info');
 
